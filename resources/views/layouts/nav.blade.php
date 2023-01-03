@@ -15,7 +15,7 @@
     <section class="navigation ">
         <div class="nav-container">
           <div class="brand">
-            <a href="#!">
+            <a href="{{ route('category-show') }}">
             <span > AK</span>
             </a>
           </div>

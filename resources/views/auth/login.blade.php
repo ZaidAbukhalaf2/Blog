@@ -12,7 +12,7 @@
                 <div >
                 <div class="col-md logo">
                     <div class="brand">
-                        <a href="{{route('index')}}">
+                        <a href="{{route('category-show')}}">
                         <span > AK</span>
                         </a>
                       </div>

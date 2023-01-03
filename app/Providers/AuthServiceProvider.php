@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +12,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\\Models\Categories'=>'App\Policies\CategoryPolicy',
+        'App\\Models\Items'=>'App\Policies\ItemsPolicy',
+
     ];
 
     /**
@@ -25,6 +27,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Gate::define('update-category','App\\Models\Categories@update')
+        // Gate::resource('categories','App\\Models\Categories')
+        // Gate::define('update-category', function (User $user,Categories $categories) {
+
+        //     return $user->id == $categories->user_id;
+        // });
+
+        // Gate::define('delete-category', function ($user, $cat) {
+
+        // });
     }
 }

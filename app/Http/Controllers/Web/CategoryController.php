@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
@@ -22,15 +22,6 @@ class CategoryController extends Controller
         return view('index',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,9 +31,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $categories = new Categories;
-        // $categories->name = $request->name;
+        $categories->name = $request->name;
         $categories->title = $request->title;
         $categories->body = $request->body;
 
@@ -55,21 +45,11 @@ class CategoryController extends Controller
         }
 
         $categories->save();
-        Alert::success('Congrats', 'Created Category Successfully ');
 
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -79,7 +59,14 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categories::findOrFail($id);
+
+        // if(Gate::denies('update-category',$category)){
+        //     abort(403 , " You can't Edit this post");
+        // }
+        $this->authorize($category);
+
+        return view('pages.Web.crud-pages.edit-category',compact('category'));
     }
 
     /**
@@ -91,8 +78,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $categories = Categories::findOrFail($id);
+
+
+        $categories->name = $request->name;
+        $categories->title = $request->title;
+        $categories->body = $request->body;
+
+        if($request->hasFile('image')){
+            $file= $request->file('image');
+            $extension= $file->getClientOriginalExtension();
+            $filename= time() .''. $extension;
+            $file->move('categories',$filename);
+            $categories->image = $filename;
+        }
+
+        $categories->save();
+        return redirect()->route('category-show');
+
+       }
 
     /**
      * Remove the specified resource from storage.
