@@ -39,6 +39,7 @@
                                             <span>
                                                 <h3>Create Subjec</h3>
 
+
                                             </span>
                                         </center>
                                     </div>
@@ -126,6 +127,8 @@
     </div>
 
 
+
+
     <div class="modal fade" id="theModal-2" style="z-index:9999999;" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -139,7 +142,9 @@
                                 <div class="col-lg-12">
                                     <div class="row">
 
-                                        <input type="number" value="{{ Auth::user()->id }}" name="user_id"
+                                        <input type="number" @if (Auth::user())
+                                        value="{{ Auth::user()->id }}"
+                                        @endif name="user_id"
                                             style="display: none">
                                         <div class="col-12 mb-3">
 
@@ -205,6 +210,7 @@
             </div>
         </div>>
     </div>
+
     <div class="container d-flex justify-content-center mt-5 ">
         <div class="row ">
             <h1 class="header_font">subjects</h1>
@@ -212,12 +218,19 @@
 
     </div>
 
-    <div class="container-fluid  mt-5">
+    <div class="container-fluid  mt-5 mb-5">
         <div class="row d-flex justify-content-evenly">
 
 
             @foreach ($categories as $category)
                 <div class="col-12 col-lg-3 col-md-12 col-sm-12 mt-3">
+                  @can('update',$category)
+                  <a href="{{ route('edit.category',$category->id) }}">
+
+                    <i class="fa fa-pencil-square" style="font-size:24px;position: absolute; color :#e3e0e0" ></i>
+
+                </a>
+                  @endcan
 
                     <a href="{{ route('items-show', $category->id) }}">
                         <img src="{{ asset('categories/' . $category->image) }}" class="card_category">
@@ -236,7 +249,7 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-4 mb-5 d-flex justify-content-center">
+    {{-- <div class="container-fluid mt-4 mb-5 d-flex justify-content-center">
         <div class="row ">
             <div class="col-12 col-lg-8 col-md-8">
 
@@ -259,56 +272,10 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form action="{{ url('category') }}" method="POST" enctype="multipart/form-data">
-                @csrf
 
 
-                <div class="modal-body">
-                    <div class="row">
-                        <input class="form-control Title_post" placeholder="Title" id="floatingTextarea" name="title">
-                        <div class="card-body row">
-                            <div class="col-lg-12 col-md-12 text-grid">
 
-                            </div>
-
-                            <div class="row ">
-                                <textarea class="form-control ms-3 mt-2" placeholder="What do you want to talk about?" id="floatingTextarea"
-                                    name="body"></textarea>
-                                <div class="card-body row">
-
-                                    <div class="row ">
-
-                                        <div class="col-lg-12">
-                                            <div class="row">
-
-
-                                                <div class="col-6 modal_img">
-                                                    <label for="image_uploads" class="custom-file-upload">
-                                                        <i class="fas fa-images"></i>
-                                                    </label>
-                                                    <input type="file" id="image_uploads" name="image" multiple
-                                                        class="ms-3 mt-2">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer" style="border-top: none">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="submit" class="btn btn-post">Post</button>
-                            </div>
-                        </div>
-                    </div>
-            </form>
-        </div>
-    </div>
-
-  
 @endsection

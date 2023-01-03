@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     use HasFactory;
-  protected $fillable=['name','title','body','image'];
+  protected $fillable=['name','title','body','image','user_id'];
+
+    public function user(){
+
+        return $this->belongsTo(User::class,'user_id');
+    }
+
 }

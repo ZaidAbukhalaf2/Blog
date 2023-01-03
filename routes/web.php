@@ -21,15 +21,25 @@ use App\Http\Controllers\Admin\CategoriesController;
 |
 */
 
+Route::get('/', function () {
 
-Route::get('/','App\Http\Controllers\Web\CategoryController@index')->name('index');
+    return view('index');
+})->name('index');
 
-    Route::get('/','App\Http\Controllers\Web\CategoryController@index')->name('index');
+    Route::get('/','App\Http\Controllers\Web\CategoryController@index')->name('category-show');
     Route::get('/items/show/{id}','App\Http\Controllers\Web\ItemsController@show')->name('items-show');
 
     Route::middleware(['auth'])->group(function () {
         Route::post('/items','App\Http\Controllers\Web\ItemsController@store')->name('items');
         Route::post('/category','App\Http\Controllers\Web\CategoryController@store')->name('store.category');
+        Route::get('/category/edit/{id}','App\Http\Controllers\Web\CategoryController@edit')->name('edit.category');
+        Route::post('/category/update/{id}','App\Http\Controllers\Web\CategoryController@update')->name('update.category');
+        Route::get('/items/edit/{id}','App\Http\Controllers\Web\ItemsController@edit')->name('edit-items');
+        Route::post('/items/update/{id}','App\Http\Controllers\Web\ItemsController@update')->name('update-items');
+
+
+
+
     });
 
 

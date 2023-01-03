@@ -69,7 +69,6 @@ class ItemsController extends Controller
     {
         $items = items::with(['category','user'])->where('category_id','=',$id)->get();
 
-        // dd($items);
         return view('pages.Web.items',compact('items'));
     }
 
@@ -81,7 +80,14 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $items = items::findOrFail($id);
+
+        $this->authorize($items);
+
+
+        return view('pages.Web.crud-pages.edit-items',compact('items'));
+
     }
 
     /**
@@ -93,7 +99,24 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $items = items::findOrFail($id);
+        $items->name = $request->name;
+        $items->title = $request->title;
+        $items->body = $request->body;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() .''.$extension;
+            $file->storeAs('public/items/',$filename);
+            $items->image = $filename;
+        }
+
+
+        $items->save();
+
+        return redirect()->route('category-show');
+
     }
 
     /**
