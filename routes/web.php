@@ -22,7 +22,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 */
 
 
-
+Route::get('/','App\Http\Controllers\Web\CategoryController@index')->name('index');
 
     Route::get('/','App\Http\Controllers\Web\CategoryController@index')->name('index');
     Route::get('/items/show/{id}','App\Http\Controllers\Web\ItemsController@show')->name('items-show');
