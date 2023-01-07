@@ -328,8 +328,8 @@ class ComposerStaticInit061d8407a4ed1e61a1c1df9e6f4ae8ff
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -548,6 +548,8 @@ class ComposerStaticInit061d8407a4ed1e61a1c1df9e6f4ae8ff
         'App\\Models\\Categories' => __DIR__ . '/../..' . '/app/Models/Categories.php',
         'App\\Models\\Items' => __DIR__ . '/../..' . '/app/Models/Items.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Policies\\CategoryPolicy' => __DIR__ . '/../..' . '/app/Policies/CategoryPolicy.php',
+        'App\\Policies\\ItemsPolicy' => __DIR__ . '/../..' . '/app/Policies/ItemsPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

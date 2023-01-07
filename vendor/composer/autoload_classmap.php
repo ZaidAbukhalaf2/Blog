@@ -37,6 +37,8 @@ return array(
     'App\\Models\\Categories' => $baseDir . '/app/Models/Categories.php',
     'App\\Models\\Items' => $baseDir . '/app/Models/Items.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Policies\\CategoryPolicy' => $baseDir . '/app/Policies/CategoryPolicy.php',
+    'App\\Policies\\ItemsPolicy' => $baseDir . '/app/Policies/ItemsPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

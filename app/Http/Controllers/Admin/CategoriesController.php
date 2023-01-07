@@ -14,9 +14,16 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     protected $categories;
+
+     public function __construct(Categories $categories){
+
+        $this->categories = $categories;
+     }
     public function index()
     {
-        $categories = Categories::all();
+        $categories = $this->categories::all();
         return view('pages.Admin.Categories.list',compact('categories'));
     }
 
@@ -77,7 +84,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = $this->categories::findOrFail($id);
         return view('pages.Admin.Categories.edit',compact('category'));
 
     }
@@ -91,7 +98,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $category = Categories::findOrFail($id);
+         $category = $this->categories::findOrFail($id);
         $category->name = $request->name;
         $category->title = $request->title;
         $category->body = $request->body;
@@ -122,7 +129,7 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
 
-        $category = Categories::findOrFail($id);
+        $category = $this->categories::findOrFail($id);
         $category->delete();
 
         return redirect()->route('categories.index');
