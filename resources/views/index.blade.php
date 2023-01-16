@@ -65,7 +65,11 @@
 
                             <div class="col-lg-12">
                                 <div class="row">
-
+                                    <input type="number" @if (Auth::user())
+                                    value="{{ Auth::user()->id }}"
+                                    @endif name="user_id"
+                                        style="display: none">
+                                    <div class="col-12 mb-3">
 
                                     <input class="form-control Title_post mb-3" placeholder="Name" id="floatingTextarea"
                                         name="name" required>

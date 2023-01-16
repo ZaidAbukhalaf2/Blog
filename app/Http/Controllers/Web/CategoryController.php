@@ -35,6 +35,7 @@ class CategoryController extends Controller
         $categories->name = $request->name;
         $categories->title = $request->title;
         $categories->body = $request->body;
+        $categories->user_id = $request->user_id;
 
         if($request->hasFile('image')){
             $file= $request->file('image');

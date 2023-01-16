@@ -61,7 +61,7 @@
         <div class="col-12 col-lg-6 col-md-8 col-sm-8">
             For User:  {{$item->user->name}}
             <div class="card">
-                <img src="{{url('storage/Web/items/'.$item->image)}}" class="card-img-top" alt="...">
+                <img src="{{asset('items/'.$item->image)}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <span>{{$item->created_at}}</span>
                     <h5 class="card-title">{{$item->title}}</h5>

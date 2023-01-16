@@ -50,7 +50,7 @@ class ItemsController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() .''.$extension;
-            $file->storeAs('public/web/items/',$filename);
+            $file->move('items',$filename);
             $items->image = $filename;
         }
 
@@ -99,6 +99,7 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $items = items::findOrFail($id);
         $items->name = $request->name;
         $items->title = $request->title;
@@ -108,7 +109,7 @@ class ItemsController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() .''.$extension;
-            $file->storeAs('public/items/',$filename);
+            $file->move('items',$filename);
             $items->image = $filename;
         }
 
